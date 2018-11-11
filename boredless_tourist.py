@@ -4,14 +4,14 @@ destinations = ['Paris, France', 'Shanghai, China', 'Los Angeles, USA', 'São Pa
 
 test_traveler = ['Erin Wilkes', 'Shanghai, China', ['historical site', 'art']]
 
-def get_destination_index(destination):
+def get_dest_index(dest):
   '''
   this function will return the destination
   index upon locating it in the
   destinations list object
   destination: str
   '''
-  destination_index = destinations[destination]
-  return destination_index
+  dest_index = destinations[dest]
+  return dest_index
 
-print(get_destination_index)
+print(get_dest_index('Los Angeles, USA'))
