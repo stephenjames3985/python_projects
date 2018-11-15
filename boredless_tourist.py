@@ -11,7 +11,7 @@ def get_dest_index(dest):
   destinations list object
   destination: str
   '''
-  dest_index = destinations[dest]
+  dest_index = destinations.index(dest)
   return dest_index
 
 print(get_dest_index('Los Angeles, USA'))
