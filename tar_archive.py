@@ -7,9 +7,10 @@ def main():
     opts = 'zcvf'
     infile = sys.argv[1]
     outfile = sys.argv[2]
-    tarfile = 'tar', ({0}, {1}, {2}).format(opts, infile, outfile)
+    tarfile = 'tar'
+    args = sys.argv[1:]
 
-    for file in os.execv(tarfile, mode='w').readline():
+    for file in os.execv(tarfile, args).readline():
         print(file)
 
 if __name__ == '__main__':
