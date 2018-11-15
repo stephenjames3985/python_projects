@@ -7,8 +7,8 @@ def main():
     opts = 'zcvf'
     infile = sys.argv[1]
     outfile = sys.argv[2]
-    tarfile = 'tar' + opts + infile + outfile
-
+    tarfile = 'tar', opts, infile, outfile
+    tarfile = str(tarfile)
     for file in os.popen(tarfile, mode='w').readline():
         print(file)
 
