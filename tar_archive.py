@@ -49,7 +49,7 @@ def main():
         when called, the function will change to the desired directory
         '''
         os.chdir(path)
-        files = os.listdir()
+        return os.listdir()
 
     # define function for compression/creation of tarfile
     def make_tar_file():
@@ -57,6 +57,7 @@ def main():
         this is the main function of this program, which is to create a tarfile
         '''
         # (until i am able to add more to it when i have more time and i am not also completely exhausted haha)
+        
 
 
     # try/except clause in case any typos or unintended chars get entered
