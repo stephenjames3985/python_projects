@@ -13,15 +13,18 @@ def main():
     arg: str
     file: str
     '''
-    # i might possibly make the next iteraton of this little
-    # extraction utility more interactive, and capable in the future,
-    # but it is almost 1am as i write this, and i am getting too
-    # tired to think clearly right now.
+    # i will make the next iteraton of this a more feature rich
+    # and capable in the future, but it is getting super late as
+    # i write this, and i am getting too tired to think clearly
+    # right now
 
     # global variables
     datetime = time.strftime('%Y/%m/%d_%H:%M')
     suffix = '.' + datetime + '.backup.tar.gz'
     default_dir = os.getcwd()
+
+    # this variable will have use for the logic i am planning for multiple OS
+    # compatibility in the future
     system_type = sys.platform
 
     # if there are arguments called with the script, just like calling a regular
@@ -40,10 +43,10 @@ def main():
         # input variable creation
         arg = input('Would you like to [c]ompress or e[x]tract a tar archive?\n>> ')
         path = input('Please enter the (abs) path to the directory which contains the file(s)\nyou would like to compress or extract.\n>> ')
-        filename = input('Please enter the name you would like appended to the archive.\n>> ')
+        filename = input('Please enter the name of the file or directory to be archived.\n>> ')
         compression = input('Would you like to use compression type [gz], [bz2], or [xz]?\n>> ')
         name = filename + datetime + '.tar.' + compression
-        tar = tarfile.open(name, mode='x:' + compression)
+
 
     # define function to put us in the working directory
     def ch_working_dir():
@@ -60,24 +63,19 @@ def main():
         '''
         # (until i am able to add more to it when i have more time and i am not also completely exhausted haha)
         current_dir = ch_working_dir()
+        tar = tarfile.open(name, 'x:' + compression)
         for file in current_dir:
+
             tar.add(file)
+
         tar.close()
 
 
     # try/except clause in case any typos or unintended chars get entered
     try:
-        # program logic for the archive process
-        
-        # hippity hoppity, easter's on its way!
-        elif arg == 'hello' and absolute_path == 'world':
-            print('You have found the magic easter egg! Make a wish, and the\ntoothe fairy will leave you a present under the christmas tree')
-            quit()
-        # if the input argument fits neither above, raise error
-        else:
-            raise ValueError
-
-
+        # call function for the archive process
+        make_tar_file()
+    # if process completes with exit status other than 0, raise Exception
     except Exception as err:
         print(err)
         quit()
