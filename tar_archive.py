@@ -22,6 +22,7 @@ def main():
     datetime = time.strftime('%Y/%m/%d_%H:%M')
     suffix = '.' + datetime + '.backup.tar.gz'
     default_dir = os.getcwd()
+    system_type = sys.platform
 
     # if there are arguments called with the script, just like calling a regular
     # tar command order
@@ -31,7 +32,8 @@ def main():
         filename = sys.argv[2]
         path = sys.argv[3]
         # by default, the files will be *.tar.gz
-        tar = tarfile.open(name=filename + suffix, mode='x:gz')
+        if arg.lower() == 'c':
+            tar = tarfile.open(name=filename + suffix, mode='x:gz')
 
     # if there are no arguments given with the script
     else:
@@ -57,13 +59,16 @@ def main():
         this is the main function of this program, which is to create a tarfile
         '''
         # (until i am able to add more to it when i have more time and i am not also completely exhausted haha)
-        
+        current_dir = ch_working_dir()
+        for file in current_dir:
+            tar.add(file)
+        tar.close()
 
 
     # try/except clause in case any typos or unintended chars get entered
     try:
         # program logic for the archive process
-
+        
         # hippity hoppity, easter's on its way!
         elif arg == 'hello' and absolute_path == 'world':
             print('You have found the magic easter egg! Make a wish, and the\ntoothe fairy will leave you a present under the christmas tree')
