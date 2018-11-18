@@ -71,10 +71,10 @@ def main():
         # ask user for input after printing the directory contents, so exact filename can be seen before input
         # hopefully lessening the chance of a mistake being made
         filename = input('Please enter the filename that you wish to extract.\n>> ')
-        unpack_location = input('Please enter the (abs) path location you wish to extract the archive into (default is the directory in which the file exists).\n>> ')
-        shutil.unpack_archive(filename, unpack_location=location)
+        extract_dir = input('Please enter the (abs) path location you wish to extract the archive into (default is the directory in which the file exists).\n>> ')
+        shutil.unpack_archive(filename, extract_dir=location)
         # print confirmation of what was done before exiting
-        print(f'The file, {filename} was extracted into {unpack_location}.')
+        print(f'The file, {filename} was extracted into {extract_dir}.')
 
     def selected_function(arg):
         '''
