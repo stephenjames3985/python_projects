@@ -21,7 +21,7 @@ def main():
     # right now
 
     # global variables
-    datetime = time.strftime('%Y-%m-%d_%H:%M')
+    datetime = time.strftime('%Y-%m-%d_%H%M')
     #suffix = '.' + datetime + '.backup.tar.gz'
     default_dir = os.getcwd()
 
@@ -71,8 +71,10 @@ def main():
         # ask user for input after printing the directory contents, so exact filename can be seen before input
         # hopefully lessening the chance of a mistake being made
         filename = input('Please enter the filename that you wish to extract.\n>> ')
+        compression = input('Please enter the suffix of the file ([gz], [bz]2, or [xz]).\n>> ')
         extract_dir = input('Please enter the (abs) path location you wish to extract the archive into (default is the directory in which the file exists).\n>> ')
-        shutil.unpack_archive(filename, extract_dir=location)
+        format = compression + 'tar'
+        shutil.unpack_archive(filename, extract_dir=None, format=None)
         # print confirmation of what was done before exiting
         print(f'The file, {filename} was extracted into {extract_dir}.')
 
@@ -86,8 +88,7 @@ def main():
         elif arg.lower() == 'x':
             return extract_tar_file()
         else:
-            print('An incorrect selection was made.')
-            raise ValueError
+            raise ValueError('An incorrect selection was made.')
 
     if arg.lower() == 'c':
         # confirm settings for user
@@ -103,7 +104,7 @@ def main():
 
     elif arg.lower() == 'x':
         # confirm as above
-        print(f'You have chosen tar -{arg} to extract a file that already exists. You will be asked for more input to select preferences momentarily.')
+        print(f'You have chosen tar -{arg} to extract a file that already exists in {location}. You will be asked for more input to select preferences momentarily.')
         reply = input('If this is the intended action, please enter [y], otherwise, enter [n].\n>> ')
         # if confirmation input is not 'y', print message and end program
         if not reply.lower() == 'y':
