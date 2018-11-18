@@ -30,16 +30,20 @@ def main():
     compression = input('Would you like to use compression type [gz], [bz2], or [xz]?\n>> ')
     name = filename + '_' + datetime + '.tar.' + compression
 
-    # confirm settings for user
-    print(f'Ok, so you chose to tar -{arg}, with location {location} contents being archived, and the filename will be {name}.')
-    reply = input('If this is correct, please be sure to enter [y], and if it is incorrect, please enter [n].\n>> ')
-    if not reply.lower() == 'y':
-        print('Please be sure to type more carefully next time.')
-        quit()
-
     # this variable will have use for the logic i am planning for multiple OS
     # compatibility in the future
     system_type = sys.platform
+
+    # confirm settings for user
+    print(f'Ok, so you chose to tar -{arg}, with location {location} contents being archived, and the final filename will be {name}.')
+    reply = input('If this is correct, please be sure to enter [y], and if it is incorrect, please enter [n].\n>> ')
+    # if confirmation input is not 'y', print message and end program
+    if not reply.lower() == 'y':
+        print('Please be sure to type more carefully next time.')
+        quit()
+    # print confirmation of the fact that the file is being created now
+    else:
+        print(f'The files you selected will be archived into filename {name}.')
 
     # define function to put us in the working directory
     def ch_working_dir():
@@ -64,6 +68,7 @@ def main():
         # close the tarfile once it is done writing itself
         tar.close()
 
+    # program logic to call make_tar_file() function if 'c' is selected for arg
     if arg.lower() == 'c':
         # try/except clause in case any typos or unintended chars get entered
         try:
