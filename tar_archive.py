@@ -19,7 +19,7 @@ def main():
     # right now
 
     # global variables
-    datetime = time.strftime('%Y/%m/%d_%H:%M')
+    datetime = time.strftime('%Y-%m-%d_%H:%M')
     #suffix = '.' + datetime + '.backup.tar.gz'
     default_dir = os.getcwd()
 
@@ -30,6 +30,13 @@ def main():
     compression = input('Would you like to use compression type [gz], [bz2], or [xz]?\n>> ')
     name = filename + '_' + datetime + '.tar.' + compression
 
+    # confirm settings for user
+    print(f'Ok, so you chose to tar -{arg}, with location {location} contents being archived, and the filename will be {name}.')
+    reply = input('If this is correct, please be sure to enter [y], and if it is incorrect, please enter [n].\n>> ')
+    if not reply.lower() == 'y':
+        print('Please be sure to type more carefully next time.')
+        quit()
+
     # this variable will have use for the logic i am planning for multiple OS
     # compatibility in the future
     system_type = sys.platform
@@ -39,7 +46,7 @@ def main():
         '''
         when called, the function will change to the desired directory, and list its contents
         '''
-        os.chdir(path)
+        os.chdir(location)
         return os.listdir()
 
     # define function for compression/creation of tarfile
@@ -47,24 +54,25 @@ def main():
         '''
         calling this function calls ch_working dir() creates the desired tarfile
         '''
-        # tar variable declaration
+        # tarfile creation variable declaration
         tar = tarfile.open(name, 'x:' + compression)
+        working_dir = ch_working_dir()
         # loop through all of the files in the current directory
-        for file in ch_working_dir():
+        for file in working_dir:
             # add file to the tar archive
             tar.add(file)
         # close the tarfile once it is done writing itself
         tar.close()
 
-
-    # try/except clause in case any typos or unintended chars get entered
-    try:
-        # call function for the archive process
-        make_tar_file()
-    # if process completes with exit status other than 0, raise Exception
-    except Exception as err:
-        print(err)
-        quit()
+    if arg.lower() == 'c':
+        # try/except clause in case any typos or unintended chars get entered
+        try:
+            # call function for the tarfile creation process
+            make_tar_file()
+        # if process completes with exit status other than 0, raise Exception
+        except Exception as err:
+            print(err)
+            quit()
 
 if __name__ == '__main__':
     main()
