@@ -58,7 +58,7 @@ def main():
         ch_working_dir()
         shutil.make_archive(name, compression + 'tar', location)
         # print confirmation of the file that was created before closing the program
-        print(f'The desired tarfile has been created in {location} as {name + '.tar.' + compression}.')
+        print(f'The desired tarfile has been created in {location} as {name + ".tar." + compression}.')
 
     # define function for extraction of tarfile
     def extract_tar_file():
@@ -99,11 +99,11 @@ def main():
             quit()
         # print confirmation of the fact that the file is being created now
         else:
-            print(f'The files you selected will be archived into filename {name + '.tar.' + compression}.')
+            print(f'The files you selected will be archived into filename {name + ".tar." + compression}.')
 
     elif arg.lower() == 'x':
         # confirm as above
-        print(f'You have chosen to extract a file that already exists. You will be asked for more input to select preferences momentarily.')
+        print(f'You have chosen tar -{arg} to extract a file that already exists. You will be asked for more input to select preferences momentarily.')
         reply = input('If this is the intended action, please enter [y], otherwise, enter [n].\n>> ')
         # if confirmation input is not 'y', print message and end program
         if not reply.lower() == 'y':
@@ -122,9 +122,6 @@ def main():
         print(err)
         quit()
 
-
-    elif arg.lower() == 'x':
-        print('You have chosen to extract a file that has already been created')
-
+# call main()
 if __name__ == '__main__':
     main()
