@@ -20,38 +20,24 @@ def main():
 
     # global variables
     datetime = time.strftime('%Y/%m/%d_%H:%M')
-    suffix = '.' + datetime + '.backup.tar.gz'
+    #suffix = '.' + datetime + '.backup.tar.gz'
     default_dir = os.getcwd()
+
+    # input variables determined by user interaction
+    arg = input('Would you like to [c]ompress or e[x]tract a tar archive?\n>> ')
+    location = input('Please enter the (abs) path to the location which contains the file(s)\nyou would like to compress or extract.\n>> ')
+    filename = input('Please enter the name of the file archive to be created or extracted.\n>> ')
+    compression = input('Would you like to use compression type [gz], [bz2], or [xz]?\n>> ')
+    name = filename + '_' + datetime + '.tar.' + compression
 
     # this variable will have use for the logic i am planning for multiple OS
     # compatibility in the future
     system_type = sys.platform
 
-    # if there are arguments called with the script, just like calling a regular
-    # tar command order
-    if len(sys.argv) > 1:
-        # variable declarations
-        arg = sys.argv[1]
-        filename = sys.argv[2]
-        path = sys.argv[3]
-        # by default, the files will be *.tar.gz
-        if arg.lower() == 'c':
-            tar = tarfile.open(name=filename + suffix, mode='x:gz')
-
-    # if there are no arguments given with the script
-    else:
-        # input variable creation
-        arg = input('Would you like to [c]ompress or e[x]tract a tar archive?\n>> ')
-        path = input('Please enter the (abs) path to the directory which contains the file(s)\nyou would like to compress or extract.\n>> ')
-        filename = input('Please enter the name of the file or directory to be archived.\n>> ')
-        compression = input('Would you like to use compression type [gz], [bz2], or [xz]?\n>> ')
-        name = filename + datetime + '.tar.' + compression
-
-
     # define function to put us in the working directory
     def ch_working_dir():
         '''
-        when called, the function will change to the desired directory
+        when called, the function will change to the desired directory, and list its contents
         '''
         os.chdir(path)
         return os.listdir()
@@ -59,15 +45,15 @@ def main():
     # define function for compression/creation of tarfile
     def make_tar_file():
         '''
-        this is the main function of this program, which is to create a tarfile
+        calling this function calls ch_working dir() creates the desired tarfile
         '''
-        # (until i am able to add more to it when i have more time and i am not also completely exhausted haha)
-        current_dir = ch_working_dir()
+        # tar variable declaration
         tar = tarfile.open(name, 'x:' + compression)
-        for file in current_dir:
-
+        # loop through all of the files in the current directory
+        for file in ch_working_dir():
+            # add file to the tar archive
             tar.add(file)
-
+        # close the tarfile once it is done writing itself
         tar.close()
 
 
