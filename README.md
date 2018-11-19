@@ -10,9 +10,13 @@
 
 <h3>ToDo List</h3>
 <ul>
-  <li><strike>complete the rest of tar_archive.py</strike></li>
+  <li><strike>complete the rest of tar_archive.py to make it functional</strike></li>
   <li><strike>figure out why the tar_archive.py script seems to execute flawlessly, except for the part where it should be extracting files, and it reports that it is successful, but nothing happens. so it is not</strike></li>
-  <li>finish adding new interactive functionality to tar script</li>
+  <li>finish adding new features:</li>
+<ol>
+  <li>list contents of tar archive selected by user</li>
+  <li>add items to archive selected by user</li>
+</ol>
   <li>remove unnecessary pieces of boredless_tourist.py</li>
   <li>add exciting new programs and features!</li>
 </ul>
