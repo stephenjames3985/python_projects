@@ -74,7 +74,7 @@ def main():
         compression = input('Please enter the suffix of the file ([gz], [bz]2, or [xz]).\n>> ')
         extract_dir = input('Please enter the (abs) path location you wish to extract the archive into (default is the directory in which the file exists).\n>> ')
         format = compression + 'tar'
-        shutil.unpack_archive(filename, extract_dir=None, format=None)
+        shutil.unpack_archive(filename, extract_dir, format)
         # print confirmation of what was done before exiting
         print(f'The file, {filename} was extracted into {extract_dir}.')
 
@@ -110,9 +110,9 @@ def main():
         if not reply.lower() == 'y':
             print('Please be sure to type more carefully next time.')
             quit()
-
         else:
             print('On with our program then!')
+
     # try/except clause in case any typos or unintended chars get entered
     try:
         # call selected function
